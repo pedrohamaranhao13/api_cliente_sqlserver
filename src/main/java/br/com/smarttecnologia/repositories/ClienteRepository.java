@@ -42,11 +42,21 @@ public class ClienteRepository {
 		statement.setInt(6, cliente.getIdCliente());
 		statement.execute();
 		
-		statement.close();
+		connection.close();
 	}
 	
 	public void delete(Cliente cliente) throws Exception {
-		//  TODO
+
+		Connection connection = ConnectionFactory.getConnection();
+		
+		String sql = "delete from cliente where idcliente=?";
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, cliente.getIdCliente());
+		statement.execute();
+		
+		connection.close();
+		
 	}
 	
 	public List<Cliente> findAll() throws Exception {
