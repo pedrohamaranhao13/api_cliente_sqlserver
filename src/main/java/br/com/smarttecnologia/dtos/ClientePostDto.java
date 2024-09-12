@@ -1,4 +1,4 @@
-package br.com.smarttecnologia.entities;
+package br.com.smarttecnologia.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,14 +11,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Cliente {
+public class ClientePostDto {
 
-	private Integer idCliente;
 	private String nome;
 	private String cpf;
 	private String email;
 	private String telefone;
-	private String observacoes; 
-	
-	
+	private String observacoes;
 }
