@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.smarttecnologia.dtos.ClientePostDto;
+import br.com.smarttecnologia.dtos.ClientePutDto;
 import br.com.smarttecnologia.entities.Cliente;
 import br.com.smarttecnologia.repositories.ClienteRepository;
 
@@ -38,9 +39,35 @@ public class ClienteController {
 	}
 	
 	@PutMapping
-	public String put() {
-		//TODO
-		return null;
+	public String put(@RequestBody ClientePutDto dto) {
+		
+		try {
+			
+			ClienteRepository clienteRepository = new ClienteRepository();
+			Cliente cliente = clienteRepository.findById(dto.getIdCliente());
+			
+			if (cliente != null) {
+				
+				cliente.setNome(dto.getNome());
+				cliente.setEmail(dto.getEmail());
+				cliente.setCpf(dto.getCpf());
+				cliente.setTelefone(dto.getTelefone());
+				cliente.setObservacoes(dto.getObservacoes());
+				
+				clienteRepository.update(cliente);
+				
+				return "Cliente atualizado com sucesso!";
+			} 
+			else {
+				return "Cliente não encontrado.";
+			}
+			
+			
+		} catch (Exception e) {
+			return "Erro :" + e.getMessage();
+		}
+		
+		
 	}
 	
 	@DeleteMapping
